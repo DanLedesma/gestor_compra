@@ -24,14 +24,20 @@
                         <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_cantidad}"/>
                         <h:outputText value="#{solDetOrdenController.selected.cantidad}" title="#{myBundle.ViewSolDetOrdenTitle_cantidad}"/>
 
-                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_unidadMed}"/>
-                        <h:outputText value="#{solDetOrdenController.selected.unidadMed}" title="#{myBundle.ViewSolDetOrdenTitle_unidadMed}"/>
-
-                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_marca}"/>
-                        <h:outputText value="#{solDetOrdenController.selected.marca}" title="#{myBundle.ViewSolDetOrdenTitle_marca}"/>
-
                         <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_costoUni}"/>
                         <h:outputText value="#{solDetOrdenController.selected.costoUni}" title="#{myBundle.ViewSolDetOrdenTitle_costoUni}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_articulo1}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.articulo1.descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_marca}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.marca.descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_solEncOrden}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.solEncOrden.idOrden}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_unidadMed}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.unidadMed.descripcion}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{myBundle.Close}" onclick="PF('SolDetOrdenViewDialog').hide()"/>
                 </h:panelGroup>

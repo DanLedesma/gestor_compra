@@ -14,6 +14,9 @@
                 <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('SolDetArticuloListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('SolDetArticuloListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('SolDetArticuloListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.SolDetArticuloMenuItem_articulo1}" icon="ui-icon-search"  actionListener="#{solDetArticuloController.prepareArticulo1}" update=":ArticuloViewForm" oncomplete="PF('ArticuloViewDialog').show()" disabled="#{empty solDetArticuloController.selected.articulo1}"/>  
+                <p:menuitem value="#{myBundle.SolDetArticuloMenuItem_solEncArticulo}" icon="ui-icon-search"  actionListener="#{solDetArticuloController.prepareSolEncArticulo}" update=":SolEncArticuloViewForm" oncomplete="PF('SolEncArticuloViewDialog').show()" disabled="#{empty solDetArticuloController.selected.solEncArticulo}"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{solDetArticuloController.items}"
@@ -36,9 +39,9 @@
                 -->
 
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetArticuloDataTableContextMenu"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetArticuloDataTableContextMenu"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetArticuloDataTableContextMenu" listener="#{solDetArticuloController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetArticuloDataTableContextMenu" listener="#{solDetArticuloController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{solDetArticuloController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('SolDetArticuloListForm:viewButton').click();"/>
 
                 <p:column sortBy="#{item.solDetArticuloPK.idSolicitud}" filterBy="#{item.solDetArticuloPK.idSolicitud}">
@@ -70,6 +73,22 @@
                         <h:outputText value="#{myBundle.ListSolDetArticuloTitle_unidadMed}"/>
                     </f:facet>
                     <h:outputText value="#{item.unidadMed}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.articulo1.descripcion}" filterBy="#{item.articulo1.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetArticuloTitle_articulo1}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.articulo1.descripcion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.solEncArticulo.idSolicitud}" filterBy="#{item.solEncArticulo.idSolicitud}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetArticuloTitle_solEncArticulo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.solEncArticulo.idSolicitud}"/>
                 </p:column>
 
 

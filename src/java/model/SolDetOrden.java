@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -27,8 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "SolDetOrden.findByIdOrden", query = "SELECT s FROM SolDetOrden s WHERE s.solDetOrdenPK.idOrden = :idOrden")
     , @NamedQuery(name = "SolDetOrden.findByArticulo", query = "SELECT s FROM SolDetOrden s WHERE s.solDetOrdenPK.articulo = :articulo")
     , @NamedQuery(name = "SolDetOrden.findByCantidad", query = "SELECT s FROM SolDetOrden s WHERE s.cantidad = :cantidad")
-    , @NamedQuery(name = "SolDetOrden.findByUnidadMed", query = "SELECT s FROM SolDetOrden s WHERE s.unidadMed = :unidadMed")
-    , @NamedQuery(name = "SolDetOrden.findByMarca", query = "SELECT s FROM SolDetOrden s WHERE s.marca = :marca")
     , @NamedQuery(name = "SolDetOrden.findByCostoUni", query = "SELECT s FROM SolDetOrden s WHERE s.costoUni = :costoUni")})
 public class SolDetOrden implements Serializable {
 
@@ -37,13 +37,21 @@ public class SolDetOrden implements Serializable {
     protected SolDetOrdenPK solDetOrdenPK;
     @Column(name = "cantidad")
     private Integer cantidad;
-    @Column(name = "unidad_med")
-    private Integer unidadMed;
-    @Column(name = "marca")
-    private Integer marca;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "costo_uni")
     private BigDecimal costoUni;
+    @JoinColumn(name = "articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Articulo articulo1;
+    @JoinColumn(name = "marca", referencedColumnName = "id_marca")
+    @ManyToOne
+    private Marca marca;
+    @JoinColumn(name = "id_orden", referencedColumnName = "id_orden", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private SolEncOrden solEncOrden;
+    @JoinColumn(name = "unidad_med", referencedColumnName = "id_unidades")
+    @ManyToOne
+    private UnidadMedida unidadMed;
 
     public SolDetOrden() {
     }
@@ -72,28 +80,44 @@ public class SolDetOrden implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Integer getUnidadMed() {
-        return unidadMed;
-    }
-
-    public void setUnidadMed(Integer unidadMed) {
-        this.unidadMed = unidadMed;
-    }
-
-    public Integer getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Integer marca) {
-        this.marca = marca;
-    }
-
     public BigDecimal getCostoUni() {
         return costoUni;
     }
 
     public void setCostoUni(BigDecimal costoUni) {
         this.costoUni = costoUni;
+    }
+
+    public Articulo getArticulo1() {
+        return articulo1;
+    }
+
+    public void setArticulo1(Articulo articulo1) {
+        this.articulo1 = articulo1;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public SolEncOrden getSolEncOrden() {
+        return solEncOrden;
+    }
+
+    public void setSolEncOrden(SolEncOrden solEncOrden) {
+        this.solEncOrden = solEncOrden;
+    }
+
+    public UnidadMedida getUnidadMed() {
+        return unidadMed;
+    }
+
+    public void setUnidadMed(UnidadMedida unidadMed) {
+        this.unidadMed = unidadMed;
     }
 
     @Override

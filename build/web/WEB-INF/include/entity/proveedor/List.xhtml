@@ -14,6 +14,8 @@
                 <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('ProveedorListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('ProveedorListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('ProveedorListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.ProveedorMenuItem_solEncArticuloCollection}" icon="ui-icon-search"  action="#{proveedorController.navigateSolEncArticuloCollection}" disabled="#{proveedorController.isSolEncArticuloCollectionEmpty}" ajax="false"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{proveedorController.items}"

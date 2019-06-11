@@ -27,16 +27,6 @@
                         </pm:field>
 
                         <pm:field>
-                            <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_idProv}"/>
-                            <h:outputText value="#{solEncArticuloController.selected.idProv}" title="#{myBundle.ViewSolEncArticuloTitle_idProv}"/>
-                        </pm:field>
-
-                        <pm:field>
-                            <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_empSol}"/>
-                            <h:outputText value="#{solEncArticuloController.selected.empSol}" title="#{myBundle.ViewSolEncArticuloTitle_empSol}"/>
-                        </pm:field>
-
-                        <pm:field>
                             <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_fecSol}"/>
                             <h:outputText value="#{solEncArticuloController.selected.fecSol}" title="#{myBundle.ViewSolEncArticuloTitle_fecSol}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
@@ -46,6 +36,16 @@
                         <pm:field>
                             <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_estado}"/>
                             <h:outputText value="#{solEncArticuloController.selected.estado}" title="#{myBundle.ViewSolEncArticuloTitle_estado}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_empSol}"/>
+                            <h:outputText value="#{solEncArticuloController.selected.empSol.idEmpleado}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_idProv}"/>
+                            <h:outputText value="#{solEncArticuloController.selected.idProv.idProveedor}"/>
                         </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>

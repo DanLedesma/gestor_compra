@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -36,6 +38,12 @@ public class SolDetArticulo implements Serializable {
     private Integer cantidad;
     @Column(name = "unidad_med")
     private Integer unidadMed;
+    @JoinColumn(name = "articulo", referencedColumnName = "id_articulo", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Articulo articulo1;
+    @JoinColumn(name = "id_solicitud", referencedColumnName = "id_solicitud", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private SolEncArticulo solEncArticulo;
 
     public SolDetArticulo() {
     }
@@ -70,6 +78,22 @@ public class SolDetArticulo implements Serializable {
 
     public void setUnidadMed(Integer unidadMed) {
         this.unidadMed = unidadMed;
+    }
+
+    public Articulo getArticulo1() {
+        return articulo1;
+    }
+
+    public void setArticulo1(Articulo articulo1) {
+        this.articulo1 = articulo1;
+    }
+
+    public SolEncArticulo getSolEncArticulo() {
+        return solEncArticulo;
+    }
+
+    public void setSolEncArticulo(SolEncArticulo solEncArticulo) {
+        this.solEncArticulo = solEncArticulo;
     }
 
     @Override

@@ -14,6 +14,10 @@
                 <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('SolEncArticuloListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('SolEncArticuloListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('SolEncArticuloListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.SolEncArticuloMenuItem_solDetArticuloCollection}" icon="ui-icon-search"  action="#{solEncArticuloController.navigateSolDetArticuloCollection}" disabled="#{solEncArticuloController.isSolDetArticuloCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{myBundle.SolEncArticuloMenuItem_empSol}" icon="ui-icon-search"  actionListener="#{solEncArticuloController.prepareEmpSol}" update=":EmpleadoViewForm" oncomplete="PF('EmpleadoViewDialog').show()" disabled="#{empty solEncArticuloController.selected.empSol}"/>  
+                <p:menuitem value="#{myBundle.SolEncArticuloMenuItem_idProv}" icon="ui-icon-search"  actionListener="#{solEncArticuloController.prepareIdProv}" update=":ProveedorViewForm" oncomplete="PF('ProveedorViewDialog').show()" disabled="#{empty solEncArticuloController.selected.idProv}"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{solEncArticuloController.items}"
@@ -36,9 +40,9 @@
                 -->
 
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolEncArticuloDataTableContextMenu"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolEncArticuloDataTableContextMenu"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolEncArticuloDataTableContextMenu" listener="#{solEncArticuloController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolEncArticuloDataTableContextMenu" listener="#{solEncArticuloController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{solEncArticuloController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('SolEncArticuloListForm:viewButton').click();"/>
 
                 <p:column sortBy="#{item.idSolicitud}" filterBy="#{item.idSolicitud}">
@@ -46,22 +50,6 @@
                         <h:outputText value="#{myBundle.ListSolEncArticuloTitle_idSolicitud}"/>
                     </f:facet>
                     <h:outputText value="#{item.idSolicitud}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.idProv}" filterBy="#{item.idProv}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListSolEncArticuloTitle_idProv}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idProv}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.empSol}" filterBy="#{item.empSol}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListSolEncArticuloTitle_empSol}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.empSol}"/>
                 </p:column>
 
 
@@ -80,6 +68,22 @@
                         <h:outputText value="#{myBundle.ListSolEncArticuloTitle_estado}"/>
                     </f:facet>
                     <h:outputText value="#{item.estado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.empSol.idEmpleado}" filterBy="#{item.empSol.idEmpleado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolEncArticuloTitle_empSol}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.empSol.idEmpleado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.idProv.idProveedor}" filterBy="#{item.idProv.idProveedor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolEncArticuloTitle_idProv}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idProv.idProveedor}"/>
                 </p:column>
 
 

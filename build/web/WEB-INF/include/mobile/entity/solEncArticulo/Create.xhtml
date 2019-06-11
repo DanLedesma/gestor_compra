@@ -22,16 +22,6 @@
                     <p:outputPanel>
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateSolEncArticuloLabel_idProv}" for="idProv" />
-                            <p:inputText id="idProv" value="#{solEncArticuloController.selected.idProv}" title="#{myBundle.CreateSolEncArticuloTitle_idProv}"/>
-                        </pm:field>
-
-                        <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateSolEncArticuloLabel_empSol}" for="empSol" />
-                            <p:inputText id="empSol" value="#{solEncArticuloController.selected.empSol}" title="#{myBundle.CreateSolEncArticuloTitle_empSol}"/>
-                        </pm:field>
-
-                        <pm:field>
                             <p:outputLabel value="#{myBundle.CreateSolEncArticuloLabel_fecSol}" for="fecSol" />
                             <p:calendar id="fecSol" pattern="MM/dd/yyyy HH:mm:ss" value="#{solEncArticuloController.selected.fecSol}" title="#{myBundle.CreateSolEncArticuloTitle_fecSol}"  showOn="button"/>
                         </pm:field>
@@ -39,6 +29,32 @@
                         <pm:field>
                             <p:outputLabel value="#{myBundle.CreateSolEncArticuloLabel_estado}" for="estado" />
                             <p:inputText id="estado" value="#{solEncArticuloController.selected.estado}" title="#{myBundle.CreateSolEncArticuloTitle_estado}" size="10" maxlength="10"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolEncArticuloLabel_empSol}" for="empSol" />
+                            <p:selectOneMenu id="empSol" value="#{solEncArticuloController.selected.empSol}"  converter="empleadoConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{empleadoController.items}"
+                                               var="empSolItem"
+                                               itemValue="#{empSolItem}"
+                                               itemLabel="#{empSolItem.idEmpleado.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolEncArticuloLabel_idProv}" for="idProv" />
+                            <p:selectOneMenu id="idProv" value="#{solEncArticuloController.selected.idProv}"  converter="proveedorConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{proveedorController.items}"
+                                               var="idProvItem"
+                                               itemValue="#{idProvItem}"
+                                               itemLabel="#{idProvItem.idProveedor.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
                         </pm:field>
                     </p:outputPanel>
                     <p:commandButton actionListener="#{solEncArticuloController.saveNew}" value="#{myBundle.Save}" update="display,:SolEncArticuloListPage:SolEncArticuloListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:SolEncArticuloListPage')}"/>

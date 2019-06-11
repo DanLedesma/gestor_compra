@@ -54,12 +54,13 @@
 
 
                             ,&nbsp;
-                            <h:outputText value="#{item.departamento}"/>
+                            <h:outputText value="#{item.estado}"/>
 
 
 
                             ,&nbsp;
-                            <h:outputText value="#{item.estado}"/>
+                            <h:outputText value="#{item.departamento.idDepto}"/>
+
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{empleadoController.selected}" />

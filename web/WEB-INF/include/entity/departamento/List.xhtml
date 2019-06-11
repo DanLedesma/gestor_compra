@@ -14,6 +14,8 @@
                 <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('DepartamentoListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('DepartamentoListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('DepartamentoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.DepartamentoMenuItem_empleadoCollection}" icon="ui-icon-search"  action="#{departamentoController.navigateEmpleadoCollection}" disabled="#{departamentoController.isEmpleadoCollectionEmpty}" ajax="false"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{departamentoController.items}"

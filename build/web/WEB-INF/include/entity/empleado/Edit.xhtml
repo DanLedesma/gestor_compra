@@ -24,11 +24,19 @@
                         <p:outputLabel value="#{myBundle.EditEmpleadoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{empleadoController.selected.nombre}" title="#{myBundle.EditEmpleadoTitle_nombre}" size="50" maxlength="50"/>
 
-                        <p:outputLabel value="#{myBundle.EditEmpleadoLabel_departamento}" for="departamento" />
-                        <p:inputText id="departamento" value="#{empleadoController.selected.departamento}" title="#{myBundle.EditEmpleadoTitle_departamento}"/>
-
                         <p:outputLabel value="#{myBundle.EditEmpleadoLabel_estado}" for="estado" />
                         <p:inputText id="estado" value="#{empleadoController.selected.estado}" title="#{myBundle.EditEmpleadoTitle_estado}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{myBundle.EditEmpleadoLabel_departamento}" for="departamento" />
+                        <p:selectOneMenu id="departamento" value="#{empleadoController.selected.departamento}"  converter="departamentoConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentoController.items}"
+                                           var="departamentoItem"
+                                           itemValue="#{departamentoItem}"
+                                           itemLabel="#{departamentoItem.idDepto.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{empleadoController.save}" value="#{myBundle.Save}" update="display,:EmpleadoListForm:datalist,:EmpleadoListForm:EmpleadoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EmpleadoEditDialog'));">
                         <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>

@@ -27,6 +27,14 @@
 
                         <p:outputLabel value="#{myBundle.EditSolDetArticuloLabel_unidadMed}" for="unidadMed" />
                         <p:inputText id="unidadMed" value="#{solDetArticuloController.selected.unidadMed}" title="#{myBundle.EditSolDetArticuloTitle_unidadMed}"/>
+
+
+                        <h:outputLabel value="#{myBundle.EditSolDetArticuloLabel_articulo1}" for="articulo1" />
+                        <h:outputText id="articulo1" value="#{solDetArticuloController.selected.articulo1}" />
+
+
+                        <h:outputLabel value="#{myBundle.EditSolDetArticuloLabel_solEncArticulo}" for="solEncArticulo" />
+                        <h:outputText id="solEncArticulo" value="#{solDetArticuloController.selected.solEncArticulo}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{solDetArticuloController.save}" value="#{myBundle.Save}" update="display,:SolDetArticuloListForm:datalist,:SolDetArticuloListForm:SolDetArticuloDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolDetArticuloEditDialog'));">
                         <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>

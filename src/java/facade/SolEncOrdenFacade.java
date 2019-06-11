@@ -5,10 +5,16 @@
  */
 package facade;
 
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.SolEncOrden;
+import model.SolEncOrden_;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import model.SolDetOrden;
 
 /**
  *
@@ -17,7 +23,7 @@ import model.SolEncOrden;
 @Stateless
 public class SolEncOrdenFacade extends AbstractFacade<SolEncOrden> {
 
-    @PersistenceContext(unitName = "gestorcompra_2PU")
+    @PersistenceContext(unitName = "g_comprasPU")
     private EntityManager em;
 
     @Override
@@ -27,6 +33,21 @@ public class SolEncOrdenFacade extends AbstractFacade<SolEncOrden> {
 
     public SolEncOrdenFacade() {
         super(SolEncOrden.class);
+    }
+
+    public boolean isSolDetOrdenCollectionEmpty(SolEncOrden entity) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<SolEncOrden> solEncOrden = cq.from(SolEncOrden.class);
+        cq.select(cb.literal(1L)).distinct(true).where(cb.equal(solEncOrden, entity), cb.isNotEmpty(solEncOrden.get(SolEncOrden_.solDetOrdenCollection)));
+        return em.createQuery(cq).getResultList().isEmpty();
+    }
+
+    public Collection<SolDetOrden> findSolDetOrdenCollection(SolEncOrden entity) {
+        SolEncOrden mergedEntity = this.getMergedEntity(entity);
+        Collection<SolDetOrden> solDetOrdenCollection = mergedEntity.getSolDetOrdenCollection();
+        solDetOrdenCollection.size();
+        return solDetOrdenCollection;
     }
     
 }

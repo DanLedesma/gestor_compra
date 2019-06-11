@@ -24,11 +24,11 @@
                         <h:outputText value="#{myBundle.ViewEmpleadoLabel_nombre}"/>
                         <h:outputText value="#{empleadoController.selected.nombre}" title="#{myBundle.ViewEmpleadoTitle_nombre}"/>
 
-                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_departamento}"/>
-                        <h:outputText value="#{empleadoController.selected.departamento}" title="#{myBundle.ViewEmpleadoTitle_departamento}"/>
-
                         <h:outputText value="#{myBundle.ViewEmpleadoLabel_estado}"/>
                         <h:outputText value="#{empleadoController.selected.estado}" title="#{myBundle.ViewEmpleadoTitle_estado}"/>
+
+                        <h:outputText value="#{myBundle.ViewEmpleadoLabel_departamento}"/>
+                        <h:outputText value="#{empleadoController.selected.departamento.idDepto}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{myBundle.Close}" onclick="PF('EmpleadoViewDialog').hide()"/>
                 </h:panelGroup>

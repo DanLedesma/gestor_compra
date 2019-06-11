@@ -54,18 +54,28 @@
 
 
                             ,&nbsp;
-                            <h:outputText value="#{item.unidadMed}"/>
-
-
-
-                            ,&nbsp;
-                            <h:outputText value="#{item.marca}"/>
-
-
-
-                            ,&nbsp;
                             <h:outputText value="#{item.costoUni}"/>
 
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.articulo1.descripcion}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.marca.descripcion}"/>
+
+
+                            <ui:remove>
+                                ,&nbsp;
+                                <h:outputText value="#{item.solEncOrden.idOrden}"/>
+                            </ui:remove>
+
+                            <ui:remove>
+                                ,&nbsp;
+                                <h:outputText value="#{item.unidadMed.descripcion}"/>
+                            </ui:remove>
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{solDetOrdenController.selected}" />
                     </p:commandLink>

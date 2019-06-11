@@ -56,6 +56,16 @@
                             ,&nbsp;
                             <h:outputText value="#{item.unidadMed}"/>
 
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.articulo1.descripcion}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.solEncArticulo.idSolicitud}"/>
+
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{solDetArticuloController.selected}" />
                     </p:commandLink>

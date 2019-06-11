@@ -5,10 +5,17 @@
  */
 package facade;
 
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Empleado;
+import model.Empleado_;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import model.Departamento;
+import model.SolEncArticulo;
 
 /**
  *
@@ -17,7 +24,7 @@ import model.Empleado;
 @Stateless
 public class EmpleadoFacade extends AbstractFacade<Empleado> {
 
-    @PersistenceContext(unitName = "gestorcompra_2PU")
+    @PersistenceContext(unitName = "g_comprasPU")
     private EntityManager em;
 
     @Override
@@ -27,6 +34,33 @@ public class EmpleadoFacade extends AbstractFacade<Empleado> {
 
     public EmpleadoFacade() {
         super(Empleado.class);
+    }
+
+    public boolean isDepartamentoEmpty(Empleado entity) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<Empleado> empleado = cq.from(Empleado.class);
+        cq.select(cb.literal(1L)).distinct(true).where(cb.equal(empleado, entity), cb.isNotNull(empleado.get(Empleado_.departamento)));
+        return em.createQuery(cq).getResultList().isEmpty();
+    }
+
+    public Departamento findDepartamento(Empleado entity) {
+        return this.getMergedEntity(entity).getDepartamento();
+    }
+
+    public boolean isSolEncArticuloCollectionEmpty(Empleado entity) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<Empleado> empleado = cq.from(Empleado.class);
+        cq.select(cb.literal(1L)).distinct(true).where(cb.equal(empleado, entity), cb.isNotEmpty(empleado.get(Empleado_.solEncArticuloCollection)));
+        return em.createQuery(cq).getResultList().isEmpty();
+    }
+
+    public Collection<SolEncArticulo> findSolEncArticuloCollection(Empleado entity) {
+        Empleado mergedEntity = this.getMergedEntity(entity);
+        Collection<SolEncArticulo> solEncArticuloCollection = mergedEntity.getSolEncArticuloCollection();
+        solEncArticuloCollection.size();
+        return solEncArticuloCollection;
     }
     
 }

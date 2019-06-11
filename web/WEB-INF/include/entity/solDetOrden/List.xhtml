@@ -14,6 +14,11 @@
                 <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('SolDetOrdenListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('SolDetOrdenListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('SolDetOrdenListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.SolDetOrdenMenuItem_articulo1}" icon="ui-icon-search"  actionListener="#{solDetOrdenController.prepareArticulo1}" update=":ArticuloViewForm" oncomplete="PF('ArticuloViewDialog').show()" disabled="#{empty solDetOrdenController.selected.articulo1}"/>  
+                <p:menuitem value="#{myBundle.SolDetOrdenMenuItem_marca}" icon="ui-icon-search"  actionListener="#{solDetOrdenController.prepareMarca}" update=":MarcaViewForm" oncomplete="PF('MarcaViewDialog').show()" disabled="#{empty solDetOrdenController.selected.marca}"/>  
+                <p:menuitem value="#{myBundle.SolDetOrdenMenuItem_solEncOrden}" icon="ui-icon-search"  actionListener="#{solDetOrdenController.prepareSolEncOrden}" update=":SolEncOrdenViewForm" oncomplete="PF('SolEncOrdenViewDialog').show()" disabled="#{empty solDetOrdenController.selected.solEncOrden}"/>  
+                <p:menuitem value="#{myBundle.SolDetOrdenMenuItem_unidadMed}" icon="ui-icon-search"  actionListener="#{solDetOrdenController.prepareUnidadMed}" update=":UnidadMedidaViewForm" oncomplete="PF('UnidadMedidaViewDialog').show()" disabled="#{empty solDetOrdenController.selected.unidadMed}"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{solDetOrdenController.items}"
@@ -36,9 +41,9 @@
                 -->
 
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetOrdenDataTableContextMenu"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetOrdenDataTableContextMenu"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetOrdenDataTableContextMenu" listener="#{solDetOrdenController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetOrdenDataTableContextMenu" listener="#{solDetOrdenController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{solDetOrdenController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('SolDetOrdenListForm:viewButton').click();"/>
 
                 <p:column sortBy="#{item.solDetOrdenPK.idOrden}" filterBy="#{item.solDetOrdenPK.idOrden}">
@@ -65,22 +70,6 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.unidadMed}" filterBy="#{item.unidadMed}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_unidadMed}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.unidadMed}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.marca}" filterBy="#{item.marca}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_marca}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.marca}"/>
-                </p:column>
-
-
                 <p:column sortBy="#{item.costoUni}" filterBy="#{item.costoUni}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListSolDetOrdenTitle_costoUni}"/>
@@ -88,6 +77,38 @@
                     <h:outputText value="#{item.costoUni}"/>
                 </p:column>
 
+
+                <p:column sortBy="#{item.articulo1.descripcion}" filterBy="#{item.articulo1.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_articulo1}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.articulo1.descripcion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.marca.descripcion}" filterBy="#{item.marca.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_marca}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.marca.descripcion}"/>
+                </p:column>
+
+                <ui:remove>
+                    <p:column sortBy="#{item.solEncOrden.idOrden}" filterBy="#{item.solEncOrden.idOrden}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListSolDetOrdenTitle_solEncOrden}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.solEncOrden.idOrden}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.unidadMed.descripcion}" filterBy="#{item.unidadMed.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListSolDetOrdenTitle_unidadMed}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.unidadMed.descripcion}"/>
+                    </p:column>
+                </ui:remove>
 
             </p:dataTable>
 

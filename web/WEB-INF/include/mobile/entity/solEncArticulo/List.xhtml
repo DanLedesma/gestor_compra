@@ -44,16 +44,6 @@
 
 
                             ,&nbsp;
-                            <h:outputText value="#{item.idProv}"/>
-
-
-
-                            ,&nbsp;
-                            <h:outputText value="#{item.empSol}"/>
-
-
-
-                            ,&nbsp;
                             <h:outputText value="#{item.fecSol}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
@@ -62,6 +52,17 @@
 
                             ,&nbsp;
                             <h:outputText value="#{item.estado}"/>
+
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.empSol.idEmpleado}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.idProv.idProveedor}"/>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{solEncArticuloController.selected}" />

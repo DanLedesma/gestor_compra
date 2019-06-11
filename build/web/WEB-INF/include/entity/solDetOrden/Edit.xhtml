@@ -25,14 +25,38 @@
                         <p:outputLabel value="#{myBundle.EditSolDetOrdenLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{solDetOrdenController.selected.cantidad}" title="#{myBundle.EditSolDetOrdenTitle_cantidad}"/>
 
-                        <p:outputLabel value="#{myBundle.EditSolDetOrdenLabel_unidadMed}" for="unidadMed" />
-                        <p:inputText id="unidadMed" value="#{solDetOrdenController.selected.unidadMed}" title="#{myBundle.EditSolDetOrdenTitle_unidadMed}"/>
-
-                        <p:outputLabel value="#{myBundle.EditSolDetOrdenLabel_marca}" for="marca" />
-                        <p:inputText id="marca" value="#{solDetOrdenController.selected.marca}" title="#{myBundle.EditSolDetOrdenTitle_marca}"/>
-
                         <p:outputLabel value="#{myBundle.EditSolDetOrdenLabel_costoUni}" for="costoUni" />
                         <p:inputText id="costoUni" value="#{solDetOrdenController.selected.costoUni}" title="#{myBundle.EditSolDetOrdenTitle_costoUni}"/>
+
+
+                        <h:outputLabel value="#{myBundle.EditSolDetOrdenLabel_articulo1}" for="articulo1" />
+                        <h:outputText id="articulo1" value="#{solDetOrdenController.selected.articulo1}" />
+
+                        <p:outputLabel value="#{myBundle.EditSolDetOrdenLabel_marca}" for="marca" />
+                        <p:selectOneMenu id="marca" value="#{solDetOrdenController.selected.marca}"  converter="marcaConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{marcaController.items}"
+                                           var="marcaItem"
+                                           itemValue="#{marcaItem}"
+                                           itemLabel="#{marcaItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="#{myBundle.EditSolDetOrdenLabel_solEncOrden}" for="solEncOrden" />
+                        <h:outputText id="solEncOrden" value="#{solDetOrdenController.selected.solEncOrden}" />
+
+                        <p:outputLabel value="#{myBundle.EditSolDetOrdenLabel_unidadMed}" for="unidadMed" />
+                        <p:selectOneMenu id="unidadMed" value="#{solDetOrdenController.selected.unidadMed}"  converter="unidadMedidaConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{unidadMedidaController.items}"
+                                           var="unidadMedItem"
+                                           itemValue="#{unidadMedItem}"
+                                           itemLabel="#{unidadMedItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{solDetOrdenController.save}" value="#{myBundle.Save}" update="display,:SolDetOrdenListForm:datalist,:SolDetOrdenListForm:SolDetOrdenDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolDetOrdenEditDialog'));">
                         <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>

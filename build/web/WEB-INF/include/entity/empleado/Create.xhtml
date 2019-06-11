@@ -21,11 +21,19 @@
                         <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{empleadoController.selected.nombre}" title="#{myBundle.CreateEmpleadoTitle_nombre}" size="50" maxlength="50"/>
 
-                        <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_departamento}" for="departamento" />
-                        <p:inputText id="departamento" value="#{empleadoController.selected.departamento}" title="#{myBundle.CreateEmpleadoTitle_departamento}"/>
-
                         <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_estado}" for="estado" />
                         <p:inputText id="estado" value="#{empleadoController.selected.estado}" title="#{myBundle.CreateEmpleadoTitle_estado}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_departamento}" for="departamento" />
+                        <p:selectOneMenu id="departamento" value="#{empleadoController.selected.departamento}"  converter="departamentoConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentoController.items}"
+                                           var="departamentoItem"
+                                           itemValue="#{departamentoItem}"
+                                           itemLabel="#{departamentoItem.idDepto.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{empleadoController.saveNew}" value="#{myBundle.Save}" update="display,:EmpleadoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EmpleadoCreateDialog'));">
                         <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>

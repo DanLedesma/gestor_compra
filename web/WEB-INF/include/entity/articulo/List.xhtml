@@ -14,6 +14,9 @@
                 <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('ArticuloListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('ArticuloListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('ArticuloListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.ArticuloMenuItem_solDetArticuloCollection}" icon="ui-icon-search"  action="#{articuloController.navigateSolDetArticuloCollection}" disabled="#{articuloController.isSolDetArticuloCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{myBundle.ArticuloMenuItem_solDetOrdenCollection}" icon="ui-icon-search"  action="#{articuloController.navigateSolDetOrdenCollection}" disabled="#{articuloController.isSolDetOrdenCollectionEmpty}" ajax="false"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{articuloController.items}"

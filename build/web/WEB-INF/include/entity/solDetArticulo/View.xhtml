@@ -26,6 +26,12 @@
 
                         <h:outputText value="#{myBundle.ViewSolDetArticuloLabel_unidadMed}"/>
                         <h:outputText value="#{solDetArticuloController.selected.unidadMed}" title="#{myBundle.ViewSolDetArticuloTitle_unidadMed}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetArticuloLabel_articulo1}"/>
+                        <h:outputText value="#{solDetArticuloController.selected.articulo1.descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetArticuloLabel_solEncArticulo}"/>
+                        <h:outputText value="#{solDetArticuloController.selected.solEncArticulo.idSolicitud}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{myBundle.Close}" onclick="PF('SolDetArticuloViewDialog').hide()"/>
                 </h:panelGroup>

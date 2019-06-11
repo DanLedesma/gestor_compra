@@ -6,20 +6,26 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,8 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "SolEncArticulo.findAll", query = "SELECT s FROM SolEncArticulo s")
     , @NamedQuery(name = "SolEncArticulo.findByIdSolicitud", query = "SELECT s FROM SolEncArticulo s WHERE s.idSolicitud = :idSolicitud")
-    , @NamedQuery(name = "SolEncArticulo.findByIdProv", query = "SELECT s FROM SolEncArticulo s WHERE s.idProv = :idProv")
-    , @NamedQuery(name = "SolEncArticulo.findByEmpSol", query = "SELECT s FROM SolEncArticulo s WHERE s.empSol = :empSol")
     , @NamedQuery(name = "SolEncArticulo.findByFecSol", query = "SELECT s FROM SolEncArticulo s WHERE s.fecSol = :fecSol")
     , @NamedQuery(name = "SolEncArticulo.findByEstado", query = "SELECT s FROM SolEncArticulo s WHERE s.estado = :estado")})
 public class SolEncArticulo implements Serializable {
@@ -43,16 +47,20 @@ public class SolEncArticulo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_solicitud")
     private Integer idSolicitud;
-    @Column(name = "id_prov")
-    private Integer idProv;
-    @Column(name = "emp_sol")
-    private Integer empSol;
     @Column(name = "fec_sol")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecSol;
     @Size(max = 10)
     @Column(name = "estado")
     private String estado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solEncArticulo")
+    private Collection<SolDetArticulo> solDetArticuloCollection;
+    @JoinColumn(name = "emp_sol", referencedColumnName = "id_empleado")
+    @ManyToOne
+    private Empleado empSol;
+    @JoinColumn(name = "id_prov", referencedColumnName = "id_proveedor")
+    @ManyToOne
+    private Proveedor idProv;
 
     public SolEncArticulo() {
     }
@@ -69,22 +77,6 @@ public class SolEncArticulo implements Serializable {
         this.idSolicitud = idSolicitud;
     }
 
-    public Integer getIdProv() {
-        return idProv;
-    }
-
-    public void setIdProv(Integer idProv) {
-        this.idProv = idProv;
-    }
-
-    public Integer getEmpSol() {
-        return empSol;
-    }
-
-    public void setEmpSol(Integer empSol) {
-        this.empSol = empSol;
-    }
-
     public Date getFecSol() {
         return fecSol;
     }
@@ -99,6 +91,31 @@ public class SolEncArticulo implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @XmlTransient
+    public Collection<SolDetArticulo> getSolDetArticuloCollection() {
+        return solDetArticuloCollection;
+    }
+
+    public void setSolDetArticuloCollection(Collection<SolDetArticulo> solDetArticuloCollection) {
+        this.solDetArticuloCollection = solDetArticuloCollection;
+    }
+
+    public Empleado getEmpSol() {
+        return empSol;
+    }
+
+    public void setEmpSol(Empleado empSol) {
+        this.empSol = empSol;
+    }
+
+    public Proveedor getIdProv() {
+        return idProv;
+    }
+
+    public void setIdProv(Proveedor idProv) {
+        this.idProv = idProv;
     }
 
     @Override

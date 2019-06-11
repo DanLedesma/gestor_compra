@@ -32,13 +32,21 @@
                         </pm:field>
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_departamento}" for="departamento" />
-                            <p:inputText id="departamento" value="#{empleadoController.selected.departamento}" title="#{myBundle.CreateEmpleadoTitle_departamento}"/>
+                            <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_estado}" for="estado" />
+                            <p:inputText id="estado" value="#{empleadoController.selected.estado}" title="#{myBundle.CreateEmpleadoTitle_estado}" size="10" maxlength="10"/>
                         </pm:field>
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_estado}" for="estado" />
-                            <p:inputText id="estado" value="#{empleadoController.selected.estado}" title="#{myBundle.CreateEmpleadoTitle_estado}" size="10" maxlength="10"/>
+                            <p:outputLabel value="#{myBundle.CreateEmpleadoLabel_departamento}" for="departamento" />
+                            <p:selectOneMenu id="departamento" value="#{empleadoController.selected.departamento}"  converter="departamentoConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{departamentoController.items}"
+                                               var="departamentoItem"
+                                               itemValue="#{departamentoItem}"
+                                               itemLabel="#{departamentoItem.idDepto.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
                         </pm:field>
                     </p:outputPanel>
                     <p:commandButton actionListener="#{empleadoController.saveNew}" value="#{myBundle.Save}" update="display,:EmpleadoListPage:EmpleadoListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:EmpleadoListPage')}"/>

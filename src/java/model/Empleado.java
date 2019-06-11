@@ -6,17 +6,22 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Empleado.findByIdEmpleado", query = "SELECT e FROM Empleado e WHERE e.idEmpleado = :idEmpleado")
     , @NamedQuery(name = "Empleado.findByCedula", query = "SELECT e FROM Empleado e WHERE e.cedula = :cedula")
     , @NamedQuery(name = "Empleado.findByNombre", query = "SELECT e FROM Empleado e WHERE e.nombre = :nombre")
-    , @NamedQuery(name = "Empleado.findByDepartamento", query = "SELECT e FROM Empleado e WHERE e.departamento = :departamento")
     , @NamedQuery(name = "Empleado.findByEstado", query = "SELECT e FROM Empleado e WHERE e.estado = :estado")})
 public class Empleado implements Serializable {
 
@@ -46,11 +50,14 @@ public class Empleado implements Serializable {
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "departamento")
-    private Integer departamento;
     @Size(max = 10)
     @Column(name = "estado")
     private String estado;
+    @JoinColumn(name = "departamento", referencedColumnName = "id_depto")
+    @ManyToOne
+    private Departamento departamento;
+    @OneToMany(mappedBy = "empSol")
+    private Collection<SolEncArticulo> solEncArticuloCollection;
 
     public Empleado() {
     }
@@ -83,20 +90,29 @@ public class Empleado implements Serializable {
         this.nombre = nombre;
     }
 
-    public Integer getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Integer departamento) {
-        this.departamento = departamento;
-    }
-
     public String getEstado() {
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    @XmlTransient
+    public Collection<SolEncArticulo> getSolEncArticuloCollection() {
+        return solEncArticuloCollection;
+    }
+
+    public void setSolEncArticuloCollection(Collection<SolEncArticulo> solEncArticuloCollection) {
+        this.solEncArticuloCollection = solEncArticuloCollection;
     }
 
     @Override

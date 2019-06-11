@@ -9,6 +9,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.SolDetArticulo;
+import model.SolDetArticulo_;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import model.Articulo;
+import model.SolEncArticulo;
 
 /**
  *
@@ -17,7 +23,7 @@ import model.SolDetArticulo;
 @Stateless
 public class SolDetArticuloFacade extends AbstractFacade<SolDetArticulo> {
 
-    @PersistenceContext(unitName = "gestorcompra_2PU")
+    @PersistenceContext(unitName = "g_comprasPU")
     private EntityManager em;
 
     @Override
@@ -27,6 +33,30 @@ public class SolDetArticuloFacade extends AbstractFacade<SolDetArticulo> {
 
     public SolDetArticuloFacade() {
         super(SolDetArticulo.class);
+    }
+
+    public boolean isArticulo1Empty(SolDetArticulo entity) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<SolDetArticulo> solDetArticulo = cq.from(SolDetArticulo.class);
+        cq.select(cb.literal(1L)).distinct(true).where(cb.equal(solDetArticulo, entity), cb.isNotNull(solDetArticulo.get(SolDetArticulo_.articulo1)));
+        return em.createQuery(cq).getResultList().isEmpty();
+    }
+
+    public Articulo findArticulo1(SolDetArticulo entity) {
+        return this.getMergedEntity(entity).getArticulo1();
+    }
+
+    public boolean isSolEncArticuloEmpty(SolDetArticulo entity) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<SolDetArticulo> solDetArticulo = cq.from(SolDetArticulo.class);
+        cq.select(cb.literal(1L)).distinct(true).where(cb.equal(solDetArticulo, entity), cb.isNotNull(solDetArticulo.get(SolDetArticulo_.solEncArticulo)));
+        return em.createQuery(cq).getResultList().isEmpty();
+    }
+
+    public SolEncArticulo findSolEncArticulo(SolDetArticulo entity) {
+        return this.getMergedEntity(entity).getSolEncArticulo();
     }
     
 }
