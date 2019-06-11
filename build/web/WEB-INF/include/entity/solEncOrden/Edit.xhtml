@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="SolEncOrdenEditDlg" widgetVar="SolEncOrdenEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditSolEncOrdenTitle}" closeOnEscape="true">
+
+            <h:form id="SolEncOrdenEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{solEncOrdenController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditSolEncOrdenLabel_idOrden}" for="idOrden" />
+                        <h:outputText id="idOrden" value="#{solEncOrdenController.selected.idOrden}" />
+
+                        <p:outputLabel value="#{myBundle.EditSolEncOrdenLabel_idSol}" for="idSol" />
+                        <p:inputText id="idSol" value="#{solEncOrdenController.selected.idSol}" title="#{myBundle.EditSolEncOrdenTitle_idSol}"/>
+
+                        <p:outputLabel value="#{myBundle.EditSolEncOrdenLabel_fecOrd}" for="fecOrd" />
+                        <p:calendar id="fecOrd" pattern="MM/dd/yyyy HH:mm:ss" value="#{solEncOrdenController.selected.fecOrd}" title="#{myBundle.EditSolEncOrdenTitle_fecOrd}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditSolEncOrdenLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{solEncOrdenController.selected.estado}" title="#{myBundle.EditSolEncOrdenTitle_estado}" size="10" maxlength="10"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{solEncOrdenController.save}" value="#{myBundle.Save}" update="display,:SolEncOrdenListForm:datalist,:SolEncOrdenListForm:SolEncOrdenDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolEncOrdenEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('SolEncOrdenEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

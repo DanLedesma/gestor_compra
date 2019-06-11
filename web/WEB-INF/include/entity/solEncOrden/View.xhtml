@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SolEncOrdenViewDlg" widgetVar="SolEncOrdenViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewSolEncOrdenTitle}" closeOnEscape="true">
+
+            <h:form id="SolEncOrdenViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{solEncOrdenController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_idOrden}"/>
+                        <h:outputText value="#{solEncOrdenController.selected.idOrden}" title="#{myBundle.ViewSolEncOrdenTitle_idOrden}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_idSol}"/>
+                        <h:outputText value="#{solEncOrdenController.selected.idSol}" title="#{myBundle.ViewSolEncOrdenTitle_idSol}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_fecOrd}"/>
+                        <h:outputText value="#{solEncOrdenController.selected.fecOrd}" title="#{myBundle.ViewSolEncOrdenTitle_fecOrd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_estado}"/>
+                        <h:outputText value="#{solEncOrdenController.selected.estado}" title="#{myBundle.ViewSolEncOrdenTitle_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('SolEncOrdenViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

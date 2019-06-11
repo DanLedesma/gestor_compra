@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ArticuloEditDlg" widgetVar="ArticuloEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditArticuloTitle}" closeOnEscape="true">
+
+            <h:form id="ArticuloEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{articuloController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditArticuloLabel_idArticulo}" for="idArticulo" />
+                        <h:outputText id="idArticulo" value="#{articuloController.selected.idArticulo}" />
+
+                        <p:outputLabel value="#{myBundle.EditArticuloLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{articuloController.selected.descripcion}" title="#{myBundle.EditArticuloTitle_descripcion}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditArticuloLabel_marca}" for="marca" />
+                        <p:inputText id="marca" value="#{articuloController.selected.marca}" title="#{myBundle.EditArticuloTitle_marca}"/>
+
+                        <p:outputLabel value="#{myBundle.EditArticuloLabel_unidadMed}" for="unidadMed" />
+                        <p:inputText id="unidadMed" value="#{articuloController.selected.unidadMed}" title="#{myBundle.EditArticuloTitle_unidadMed}"/>
+
+                        <p:outputLabel value="#{myBundle.EditArticuloLabel_existencia}" for="existencia" />
+                        <p:inputText id="existencia" value="#{articuloController.selected.existencia}" title="#{myBundle.EditArticuloTitle_existencia}"/>
+
+                        <p:outputLabel value="#{myBundle.EditArticuloLabel_costo}" for="costo" />
+                        <p:inputText id="costo" value="#{articuloController.selected.costo}" title="#{myBundle.EditArticuloTitle_costo}"/>
+
+                        <p:outputLabel value="#{myBundle.EditArticuloLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{articuloController.selected.estado}" title="#{myBundle.EditArticuloTitle_estado}" size="10" maxlength="10"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{articuloController.save}" value="#{myBundle.Save}" update="display,:ArticuloListForm:datalist,:ArticuloListForm:ArticuloDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ArticuloEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('ArticuloEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

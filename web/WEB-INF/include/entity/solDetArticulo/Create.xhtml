@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SolDetArticuloCreateDlg" widgetVar="SolDetArticuloCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateSolDetArticuloTitle}" closeOnEscape="true">
+
+            <h:form id="SolDetArticuloCreateForm">
+
+                <h:panelGroup id="display" rendered="#{solDetArticuloController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetArticuloLabel_solDetArticuloPK_idSolicitud}" for="solDetArticuloPK_idSolicitud" />
+                        <p:inputText id="solDetArticuloPK_idSolicitud" value="#{solDetArticuloController.selected.solDetArticuloPK.idSolicitud}" title="#{myBundle.CreateSolDetArticuloTitle_solDetArticuloPK_idSolicitud}" required="true" requiredMessage="#{myBundle.CreateSolDetArticuloRequiredMessage_solDetArticuloPK_idSolicitud}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetArticuloLabel_solDetArticuloPK_articulo}" for="solDetArticuloPK_articulo" />
+                        <p:inputText id="solDetArticuloPK_articulo" value="#{solDetArticuloController.selected.solDetArticuloPK.articulo}" title="#{myBundle.CreateSolDetArticuloTitle_solDetArticuloPK_articulo}" required="true" requiredMessage="#{myBundle.CreateSolDetArticuloRequiredMessage_solDetArticuloPK_articulo}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetArticuloLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{solDetArticuloController.selected.cantidad}" title="#{myBundle.CreateSolDetArticuloTitle_cantidad}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetArticuloLabel_unidadMed}" for="unidadMed" />
+                        <p:inputText id="unidadMed" value="#{solDetArticuloController.selected.unidadMed}" title="#{myBundle.CreateSolDetArticuloTitle_unidadMed}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{solDetArticuloController.saveNew}" value="#{myBundle.Save}" update="display,:SolDetArticuloListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolDetArticuloCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('SolDetArticuloCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SolDetOrdenCreateDlg" widgetVar="SolDetOrdenCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateSolDetOrdenTitle}" closeOnEscape="true">
+
+            <h:form id="SolDetOrdenCreateForm">
+
+                <h:panelGroup id="display" rendered="#{solDetOrdenController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_solDetOrdenPK_idOrden}" for="solDetOrdenPK_idOrden" />
+                        <p:inputText id="solDetOrdenPK_idOrden" value="#{solDetOrdenController.selected.solDetOrdenPK.idOrden}" title="#{myBundle.CreateSolDetOrdenTitle_solDetOrdenPK_idOrden}" required="true" requiredMessage="#{myBundle.CreateSolDetOrdenRequiredMessage_solDetOrdenPK_idOrden}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_solDetOrdenPK_articulo}" for="solDetOrdenPK_articulo" />
+                        <p:inputText id="solDetOrdenPK_articulo" value="#{solDetOrdenController.selected.solDetOrdenPK.articulo}" title="#{myBundle.CreateSolDetOrdenTitle_solDetOrdenPK_articulo}" required="true" requiredMessage="#{myBundle.CreateSolDetOrdenRequiredMessage_solDetOrdenPK_articulo}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{solDetOrdenController.selected.cantidad}" title="#{myBundle.CreateSolDetOrdenTitle_cantidad}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_unidadMed}" for="unidadMed" />
+                        <p:inputText id="unidadMed" value="#{solDetOrdenController.selected.unidadMed}" title="#{myBundle.CreateSolDetOrdenTitle_unidadMed}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_marca}" for="marca" />
+                        <p:inputText id="marca" value="#{solDetOrdenController.selected.marca}" title="#{myBundle.CreateSolDetOrdenTitle_marca}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_costoUni}" for="costoUni" />
+                        <p:inputText id="costoUni" value="#{solDetOrdenController.selected.costoUni}" title="#{myBundle.CreateSolDetOrdenTitle_costoUni}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{solDetOrdenController.saveNew}" value="#{myBundle.Save}" update="display,:SolDetOrdenListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolDetOrdenCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('SolDetOrdenCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

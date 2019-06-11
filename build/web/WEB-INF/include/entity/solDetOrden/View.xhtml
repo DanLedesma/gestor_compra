@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SolDetOrdenViewDlg" widgetVar="SolDetOrdenViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewSolDetOrdenTitle}" closeOnEscape="true">
+
+            <h:form id="SolDetOrdenViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{solDetOrdenController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_solDetOrdenPK_idOrden}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.solDetOrdenPK.idOrden}" title="#{myBundle.ViewSolDetOrdenTitle_solDetOrdenPK_idOrden}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_solDetOrdenPK_articulo}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.solDetOrdenPK.articulo}" title="#{myBundle.ViewSolDetOrdenTitle_solDetOrdenPK_articulo}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_cantidad}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.cantidad}" title="#{myBundle.ViewSolDetOrdenTitle_cantidad}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_unidadMed}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.unidadMed}" title="#{myBundle.ViewSolDetOrdenTitle_unidadMed}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_marca}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.marca}" title="#{myBundle.ViewSolDetOrdenTitle_marca}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolDetOrdenLabel_costoUni}"/>
+                        <h:outputText value="#{solDetOrdenController.selected.costoUni}" title="#{myBundle.ViewSolDetOrdenTitle_costoUni}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('SolDetOrdenViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

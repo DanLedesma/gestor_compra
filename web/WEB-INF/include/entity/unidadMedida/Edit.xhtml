@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="UnidadMedidaEditDlg" widgetVar="UnidadMedidaEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditUnidadMedidaTitle}" closeOnEscape="true">
+
+            <h:form id="UnidadMedidaEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{unidadMedidaController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditUnidadMedidaLabel_idUnidades}" for="idUnidades" />
+                        <h:outputText id="idUnidades" value="#{unidadMedidaController.selected.idUnidades}" />
+
+                        <p:outputLabel value="#{myBundle.EditUnidadMedidaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{unidadMedidaController.selected.descripcion}" title="#{myBundle.EditUnidadMedidaTitle_descripcion}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditUnidadMedidaLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{unidadMedidaController.selected.estado}" title="#{myBundle.EditUnidadMedidaTitle_estado}" size="10" maxlength="10"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{unidadMedidaController.save}" value="#{myBundle.Save}" update="display,:UnidadMedidaListForm:datalist,:UnidadMedidaListForm:UnidadMedidaDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UnidadMedidaEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('UnidadMedidaEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

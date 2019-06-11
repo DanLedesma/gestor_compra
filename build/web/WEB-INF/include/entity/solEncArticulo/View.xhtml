@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SolEncArticuloViewDlg" widgetVar="SolEncArticuloViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewSolEncArticuloTitle}" closeOnEscape="true">
+
+            <h:form id="SolEncArticuloViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{solEncArticuloController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_idSolicitud}"/>
+                        <h:outputText value="#{solEncArticuloController.selected.idSolicitud}" title="#{myBundle.ViewSolEncArticuloTitle_idSolicitud}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_idProv}"/>
+                        <h:outputText value="#{solEncArticuloController.selected.idProv}" title="#{myBundle.ViewSolEncArticuloTitle_idProv}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_empSol}"/>
+                        <h:outputText value="#{solEncArticuloController.selected.empSol}" title="#{myBundle.ViewSolEncArticuloTitle_empSol}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_fecSol}"/>
+                        <h:outputText value="#{solEncArticuloController.selected.fecSol}" title="#{myBundle.ViewSolEncArticuloTitle_fecSol}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewSolEncArticuloLabel_estado}"/>
+                        <h:outputText value="#{solEncArticuloController.selected.estado}" title="#{myBundle.ViewSolEncArticuloTitle_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('SolEncArticuloViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SolDetOrdenCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateSolDetOrdenTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SolDetOrdenListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SolDetOrdenCreateForm">
+
+                <h:panelGroup id="display" rendered="#{solDetOrdenController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_solDetOrdenPK_idOrden}" for="solDetOrdenPK_idOrden" />
+                            <p:inputText id="solDetOrdenPK_idOrden" value="#{solDetOrdenController.selected.solDetOrdenPK.idOrden}" title="#{myBundle.CreateSolDetOrdenTitle_solDetOrdenPK_idOrden}" required="true" requiredMessage="#{myBundle.CreateSolDetOrdenRequiredMessage_solDetOrdenPK_idOrden}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_solDetOrdenPK_articulo}" for="solDetOrdenPK_articulo" />
+                            <p:inputText id="solDetOrdenPK_articulo" value="#{solDetOrdenController.selected.solDetOrdenPK.articulo}" title="#{myBundle.CreateSolDetOrdenTitle_solDetOrdenPK_articulo}" required="true" requiredMessage="#{myBundle.CreateSolDetOrdenRequiredMessage_solDetOrdenPK_articulo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_cantidad}" for="cantidad" />
+                            <p:inputText id="cantidad" value="#{solDetOrdenController.selected.cantidad}" title="#{myBundle.CreateSolDetOrdenTitle_cantidad}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_unidadMed}" for="unidadMed" />
+                            <p:inputText id="unidadMed" value="#{solDetOrdenController.selected.unidadMed}" title="#{myBundle.CreateSolDetOrdenTitle_unidadMed}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_marca}" for="marca" />
+                            <p:inputText id="marca" value="#{solDetOrdenController.selected.marca}" title="#{myBundle.CreateSolDetOrdenTitle_marca}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateSolDetOrdenLabel_costoUni}" for="costoUni" />
+                            <p:inputText id="costoUni" value="#{solDetOrdenController.selected.costoUni}" title="#{myBundle.CreateSolDetOrdenTitle_costoUni}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{solDetOrdenController.saveNew}" value="#{myBundle.Save}" update="display,:SolDetOrdenListPage:SolDetOrdenListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:SolDetOrdenListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

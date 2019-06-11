@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SolEncOrdenViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewSolEncOrdenTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SolEncOrdenListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SolEncOrdenViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{solEncOrdenController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_idOrden}"/>
+                            <h:outputText value="#{solEncOrdenController.selected.idOrden}" title="#{myBundle.ViewSolEncOrdenTitle_idOrden}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_idSol}"/>
+                            <h:outputText value="#{solEncOrdenController.selected.idSol}" title="#{myBundle.ViewSolEncOrdenTitle_idSol}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_fecOrd}"/>
+                            <h:outputText value="#{solEncOrdenController.selected.fecOrd}" title="#{myBundle.ViewSolEncOrdenTitle_fecOrd}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSolEncOrdenLabel_estado}"/>
+                            <h:outputText value="#{solEncOrdenController.selected.estado}" title="#{myBundle.ViewSolEncOrdenTitle_estado}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

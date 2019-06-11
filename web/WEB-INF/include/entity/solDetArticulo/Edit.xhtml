@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="SolDetArticuloEditDlg" widgetVar="SolDetArticuloEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditSolDetArticuloTitle}" closeOnEscape="true">
+
+            <h:form id="SolDetArticuloEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{solDetArticuloController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditSolDetArticuloLabel_solDetArticuloPK_idSolicitud}" for="solDetArticuloPK_idSolicitud" />
+                        <h:outputText id="solDetArticuloPK_idSolicitud" value="#{solDetArticuloController.selected.solDetArticuloPK.idSolicitud}" />
+
+
+                        <h:outputLabel value="#{myBundle.EditSolDetArticuloLabel_solDetArticuloPK_articulo}" for="solDetArticuloPK_articulo" />
+                        <h:outputText id="solDetArticuloPK_articulo" value="#{solDetArticuloController.selected.solDetArticuloPK.articulo}" />
+
+                        <p:outputLabel value="#{myBundle.EditSolDetArticuloLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{solDetArticuloController.selected.cantidad}" title="#{myBundle.EditSolDetArticuloTitle_cantidad}"/>
+
+                        <p:outputLabel value="#{myBundle.EditSolDetArticuloLabel_unidadMed}" for="unidadMed" />
+                        <p:inputText id="unidadMed" value="#{solDetArticuloController.selected.unidadMed}" title="#{myBundle.EditSolDetArticuloTitle_unidadMed}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{solDetArticuloController.save}" value="#{myBundle.Save}" update="display,:SolDetArticuloListForm:datalist,:SolDetArticuloListForm:SolDetArticuloDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolDetArticuloEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('SolDetArticuloEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

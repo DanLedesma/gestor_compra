@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SolEncArticuloEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditSolEncArticuloTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SolEncArticuloListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SolEncArticuloEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{solEncArticuloController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{myBundle.EditSolEncArticuloLabel_idSolicitud}" for="idSolicitud" />
+                            <h:outputText id="idSolicitud" value="#{solEncArticuloController.selected.idSolicitud}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_idProv}" for="idProv" />
+                            <p:inputText id="idProv" value="#{solEncArticuloController.selected.idProv}" title="#{myBundle.EditSolEncArticuloTitle_idProv}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_empSol}" for="empSol" />
+                            <p:inputText id="empSol" value="#{solEncArticuloController.selected.empSol}" title="#{myBundle.EditSolEncArticuloTitle_empSol}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_fecSol}" for="fecSol" />
+                            <p:calendar id="fecSol" pattern="MM/dd/yyyy HH:mm:ss" value="#{solEncArticuloController.selected.fecSol}" title="#{myBundle.EditSolEncArticuloTitle_fecSol}"  showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_estado}" for="estado" />
+                            <p:inputText id="estado" value="#{solEncArticuloController.selected.estado}" title="#{myBundle.EditSolEncArticuloTitle_estado}" size="10" maxlength="10"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{solEncArticuloController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:SolEncArticuloListPage:SolEncArticuloListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:SolEncArticuloListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

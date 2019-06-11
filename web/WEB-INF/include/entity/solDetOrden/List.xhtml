@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="SolDetOrdenListForm">
+
+        <p:panel header="#{myBundle.ListSolDetOrdenTitle}">
+            <p:contextMenu id="SolDetOrdenDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('SolDetOrdenListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('SolDetOrdenListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('SolDetOrdenListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('SolDetOrdenListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{solDetOrdenController.items}"
+                         lazy="false"
+                         rowKey="#{item.solDetOrdenPK}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{solDetOrdenController.selected}"
+                         filteredValue="#{solDetOrdenController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{solDetOrdenController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.solDetOrdenPK}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetOrdenDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolDetOrdenDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('SolDetOrdenListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.solDetOrdenPK.idOrden}" filterBy="#{item.solDetOrdenPK.idOrden}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_solDetOrdenPK_idOrden}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.solDetOrdenPK.idOrden}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.solDetOrdenPK.articulo}" filterBy="#{item.solDetOrdenPK.articulo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_solDetOrdenPK_articulo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.solDetOrdenPK.articulo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.cantidad}" filterBy="#{item.cantidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_cantidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidad}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.unidadMed}" filterBy="#{item.unidadMed}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_unidadMed}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.unidadMed}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.marca}" filterBy="#{item.marca}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_marca}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.marca}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.costoUni}" filterBy="#{item.costoUni}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolDetOrdenTitle_costoUni}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.costoUni}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{solDetOrdenController.prepareCreate}" update=":SolDetOrdenCreateForm" oncomplete="PF('SolDetOrdenCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":SolDetOrdenViewForm" oncomplete="PF('SolDetOrdenViewDialog').show()" disabled="#{empty solDetOrdenController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":SolDetOrdenEditForm" oncomplete="PF('SolDetOrdenEditDialog').show()" disabled="#{empty solDetOrdenController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{solDetOrdenController.delete}" update=":growl,datalist" disabled="#{empty solDetOrdenController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

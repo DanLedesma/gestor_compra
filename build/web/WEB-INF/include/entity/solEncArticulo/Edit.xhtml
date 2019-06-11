@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="SolEncArticuloEditDlg" widgetVar="SolEncArticuloEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditSolEncArticuloTitle}" closeOnEscape="true">
+
+            <h:form id="SolEncArticuloEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{solEncArticuloController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditSolEncArticuloLabel_idSolicitud}" for="idSolicitud" />
+                        <h:outputText id="idSolicitud" value="#{solEncArticuloController.selected.idSolicitud}" />
+
+                        <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_idProv}" for="idProv" />
+                        <p:inputText id="idProv" value="#{solEncArticuloController.selected.idProv}" title="#{myBundle.EditSolEncArticuloTitle_idProv}"/>
+
+                        <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_empSol}" for="empSol" />
+                        <p:inputText id="empSol" value="#{solEncArticuloController.selected.empSol}" title="#{myBundle.EditSolEncArticuloTitle_empSol}"/>
+
+                        <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_fecSol}" for="fecSol" />
+                        <p:calendar id="fecSol" pattern="MM/dd/yyyy HH:mm:ss" value="#{solEncArticuloController.selected.fecSol}" title="#{myBundle.EditSolEncArticuloTitle_fecSol}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditSolEncArticuloLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{solEncArticuloController.selected.estado}" title="#{myBundle.EditSolEncArticuloTitle_estado}" size="10" maxlength="10"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{solEncArticuloController.save}" value="#{myBundle.Save}" update="display,:SolEncArticuloListForm:datalist,:SolEncArticuloListForm:SolEncArticuloDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolEncArticuloEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('SolEncArticuloEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
