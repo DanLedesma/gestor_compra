@@ -1,0 +1,53 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.gestion.facade;
+
+import com.gestion.compra.Proveedor;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import com.gestion.compra.Proveedor_;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import com.gestion.compra.SolEncArticulo;
+import java.util.Collection;
+
+/**
+ *
+ * @author 20162645
+ */
+@Stateless
+public class ProveedorFacade extends AbstractFacade<Proveedor> {
+
+    @PersistenceContext(unitName = "g_comprasPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public ProveedorFacade() {
+        super(Proveedor.class);
+    }
+
+    public boolean isSolEncArticuloCollectionEmpty(Proveedor entity) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<Proveedor> proveedor = cq.from(Proveedor.class);
+        cq.select(cb.literal(1L)).distinct(true).where(cb.equal(proveedor, entity), cb.isNotEmpty(proveedor.get(Proveedor_.solEncArticuloCollection)));
+        return em.createQuery(cq).getResultList().isEmpty();
+    }
+
+    public Collection<SolEncArticulo> findSolEncArticuloCollection(Proveedor entity) {
+        Proveedor mergedEntity = this.getMergedEntity(entity);
+        Collection<SolEncArticulo> solEncArticuloCollection = mergedEntity.getSolEncArticuloCollection();
+        solEncArticuloCollection.size();
+        return solEncArticuloCollection;
+    }
+    
+}
