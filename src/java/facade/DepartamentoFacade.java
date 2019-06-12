@@ -9,12 +9,12 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.Departamento;
-import model.Departamento_;
+import modelo.Departamento;
+import modelo.Departamento_;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.Empleado;
+import modelo.Empleado;
 
 /**
  *
@@ -23,7 +23,7 @@ import model.Empleado;
 @Stateless
 public class DepartamentoFacade extends AbstractFacade<Departamento> {
 
-    @PersistenceContext(unitName = "g_comprasPU")
+    @PersistenceContext(unitName = "ferreteriagestioncompraPU")
     private EntityManager em;
 
     @Override

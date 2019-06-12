@@ -9,13 +9,13 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.Articulo;
-import model.Articulo_;
+import modelo.Articulo;
+import modelo.Articulo_;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.SolDetArticulo;
-import model.SolDetOrden;
+import modelo.SolDetArticulo;
+import modelo.SolDetOrden;
 
 /**
  *
@@ -24,7 +24,7 @@ import model.SolDetOrden;
 @Stateless
 public class ArticuloFacade extends AbstractFacade<Articulo> {
 
-    @PersistenceContext(unitName = "g_comprasPU")
+    @PersistenceContext(unitName = "ferreteriagestioncompraPU")
     private EntityManager em;
 
     @Override

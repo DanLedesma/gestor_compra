@@ -1,6 +1,6 @@
 package converter;
 
-import model.SolEncOrden;
+import modelo.SolEncOrden;
 import facade.SolEncOrdenFacade;
 import controller.util.JsfUtil;
 import java.util.logging.Level;

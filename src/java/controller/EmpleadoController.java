@@ -1,7 +1,7 @@
 package controller;
 
-import model.Empleado;
-import model.SolEncArticulo;
+import modelo.Empleado;
+import modelo.SolEncArticulo;
 import java.util.Collection;
 import facade.EmpleadoFacade;
 import controller.util.MobilePageController;

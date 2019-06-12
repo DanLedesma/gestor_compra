@@ -1,6 +1,6 @@
 package converter;
 
-import model.Marca;
+import modelo.Marca;
 import facade.MarcaFacade;
 import controller.util.JsfUtil;
 import java.util.logging.Level;

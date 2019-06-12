@@ -1,7 +1,7 @@
 package controller;
 
-import model.SolEncOrden;
-import model.SolDetOrden;
+import modelo.SolEncOrden;
+import modelo.SolDetOrden;
 import java.util.Collection;
 import facade.SolEncOrdenFacade;
 import controller.util.MobilePageController;

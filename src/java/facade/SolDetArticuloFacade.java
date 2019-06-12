@@ -8,13 +8,13 @@ package facade;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.SolDetArticulo;
-import model.SolDetArticulo_;
+import modelo.SolDetArticulo;
+import modelo.SolDetArticulo_;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.Articulo;
-import model.SolEncArticulo;
+import modelo.Articulo;
+import modelo.SolEncArticulo;
 
 /**
  *
@@ -23,7 +23,7 @@ import model.SolEncArticulo;
 @Stateless
 public class SolDetArticuloFacade extends AbstractFacade<SolDetArticulo> {
 
-    @PersistenceContext(unitName = "g_comprasPU")
+    @PersistenceContext(unitName = "ferreteriagestioncompraPU")
     private EntityManager em;
 
     @Override

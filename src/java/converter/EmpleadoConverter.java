@@ -1,6 +1,6 @@
 package converter;
 
-import model.Empleado;
+import modelo.Empleado;
 import facade.EmpleadoFacade;
 import controller.util.JsfUtil;
 import java.util.logging.Level;

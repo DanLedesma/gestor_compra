@@ -1,6 +1,6 @@
 package converter;
 
-import model.UnidadMedida;
+import modelo.UnidadMedida;
 import facade.UnidadMedidaFacade;
 import controller.util.JsfUtil;
 import java.util.logging.Level;

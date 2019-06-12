@@ -1,7 +1,7 @@
 package controller;
 
-import model.UnidadMedida;
-import model.SolDetOrden;
+import modelo.UnidadMedida;
+import modelo.SolDetOrden;
 import java.util.Collection;
 import facade.UnidadMedidaFacade;
 import controller.util.MobilePageController;

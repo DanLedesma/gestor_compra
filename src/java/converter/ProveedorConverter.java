@@ -1,6 +1,6 @@
 package converter;
 
-import model.Proveedor;
+import modelo.Proveedor;
 import facade.ProveedorFacade;
 import controller.util.JsfUtil;
 import java.util.logging.Level;

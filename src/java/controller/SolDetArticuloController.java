@@ -1,6 +1,6 @@
 package controller;
 
-import model.SolDetArticulo;
+import modelo.SolDetArticulo;
 import facade.SolDetArticuloFacade;
 import controller.util.MobilePageController;
 import javax.inject.Named;
@@ -32,7 +32,7 @@ public class SolDetArticuloController extends AbstractController<SolDetArticulo>
 
     @Override
     protected void initializeEmbeddableKey() {
-        this.getSelected().setSolDetArticuloPK(new model.SolDetArticuloPK());
+        this.getSelected().setSolDetArticuloPK(new modelo.SolDetArticuloPK());
     }
 
     /**

@@ -1,7 +1,7 @@
 package controller;
 
-import model.Marca;
-import model.SolDetOrden;
+import modelo.Marca;
+import modelo.SolDetOrden;
 import java.util.Collection;
 import facade.MarcaFacade;
 import controller.util.MobilePageController;

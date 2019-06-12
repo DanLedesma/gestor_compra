@@ -1,8 +1,8 @@
 package controller;
 
-import model.Articulo;
-import model.SolDetArticulo;
-import model.SolDetOrden;
+import modelo.Articulo;
+import modelo.SolDetArticulo;
+import modelo.SolDetOrden;
 import java.util.Collection;
 import facade.ArticuloFacade;
 import controller.util.MobilePageController;

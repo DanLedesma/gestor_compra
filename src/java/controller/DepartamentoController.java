@@ -1,7 +1,7 @@
 package controller;
 
-import model.Departamento;
-import model.Empleado;
+import modelo.Departamento;
+import modelo.Empleado;
 import java.util.Collection;
 import facade.DepartamentoFacade;
 import controller.util.MobilePageController;

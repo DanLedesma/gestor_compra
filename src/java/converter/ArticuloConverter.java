@@ -1,6 +1,6 @@
 package converter;
 
-import model.Articulo;
+import modelo.Articulo;
 import facade.ArticuloFacade;
 import controller.util.JsfUtil;
 import java.util.logging.Level;

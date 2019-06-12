@@ -9,12 +9,12 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.Marca;
-import model.Marca_;
+import modelo.Marca;
+import modelo.Marca_;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.SolDetOrden;
+import modelo.SolDetOrden;
 
 /**
  *
@@ -23,7 +23,7 @@ import model.SolDetOrden;
 @Stateless
 public class MarcaFacade extends AbstractFacade<Marca> {
 
-    @PersistenceContext(unitName = "g_comprasPU")
+    @PersistenceContext(unitName = "ferreteriagestioncompraPU")
     private EntityManager em;
 
     @Override

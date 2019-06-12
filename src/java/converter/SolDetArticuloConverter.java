@@ -1,6 +1,6 @@
 package converter;
 
-import model.SolDetArticulo;
+import modelo.SolDetArticulo;
 import facade.SolDetArticuloFacade;
 import controller.util.JsfUtil;
 import java.util.logging.Level;
@@ -27,16 +27,16 @@ public class SolDetArticuloConverter implements Converter {
         return this.getEjbFacade().find(getKey(value));
     }
 
-    model.SolDetArticuloPK getKey(String value) {
-        model.SolDetArticuloPK key;
+    modelo.SolDetArticuloPK getKey(String value) {
+        modelo.SolDetArticuloPK key;
         String values[] = value.split(SEPARATOR_ESCAPED);
-        key = new model.SolDetArticuloPK();
+        key = new modelo.SolDetArticuloPK();
         key.setIdSolicitud(Integer.parseInt(values[0]));
         key.setArticulo(Integer.parseInt(values[1]));
         return key;
     }
 
-    String getStringKey(model.SolDetArticuloPK value) {
+    String getStringKey(modelo.SolDetArticuloPK value) {
         StringBuffer sb = new StringBuffer();
         sb.append(value.getIdSolicitud());
         sb.append(SEPARATOR);
